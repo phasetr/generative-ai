@@ -1,0 +1,10 @@
+beautifulsoup4==4.12.2
+langchain==0.0.225
+openai==0.27.8
+PyPDF2==3.0.1
+pycryptodome==3.19.0
+pytube==15.0.0
+qdrant-client==1.6.9
+streamlit==1.24.0
+tiktoken==0.5.1
+youtube-transcript-api==0.6.1
