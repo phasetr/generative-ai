@@ -1,5 +1,6 @@
 import requests
 import json
+import sounddevice as sd
 
 # url = "http://127.0.0.1:50021/"
 # Dockerからアクセスするためにホストを変更している
@@ -14,7 +15,7 @@ item_data = {
 res = requests.post(f"{url}audio_query", params=item_data)
 res_json = res.json()
 
-print(res_json)
+# print(res_json)
 
 query_data = res_json
 a_params = {
@@ -24,4 +25,7 @@ res = requests.post(
     f"{url}synthesis",
     params=a_params, 
     data=json.dumps(query_data))
-print(res.content)
+# print(res.content)
+
+with open("sound_device.txt", "w", encoding="utf-8") as f:
+    f.write(str(sd.query_devices()))

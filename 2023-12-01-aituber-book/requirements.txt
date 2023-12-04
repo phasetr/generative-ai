@@ -1,4 +1,5 @@
 openai==0.28.1
 python-dotenv==1.0.0
 requests==2.31.0
+sounddevice==0.4.6
 uuid7==0.1.0
