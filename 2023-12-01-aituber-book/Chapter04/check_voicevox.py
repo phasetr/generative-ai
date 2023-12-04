@@ -1,11 +1,12 @@
+import dotenv
+import os
 import requests
 import json
 import sounddevice as sd
 
-# url = "http://127.0.0.1:50021/"
-# Dockerからアクセスするためにホストを変更している
-# 必要に応じて環境変数に指定しよう
-url = "http://host.docker.internal:50021/"
+dotenv.load_dotenv()
+host = os.environ.get("HOST", "host.docker.internal")
+url = f"http://{host}:50021/"
 text = "こんにちは"
 speaker_id = 1
 item_data = {

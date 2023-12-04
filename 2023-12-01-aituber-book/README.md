@@ -10,3 +10,8 @@
 ## Chapter04
 
 - `Docker`上で`check_voicevox.py`を実行すると`sound_devise.txt`が空になる
+
+```shell
+python Chapter04/check_voicevox.py
+python Chapter04/test_voicevox.py
+```
