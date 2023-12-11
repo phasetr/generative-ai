@@ -1,0 +1,4 @@
+langchain==0.0.332
+openai==1.2.0
+python-dotenv==1.0.0
+uuid7==0.1.0
