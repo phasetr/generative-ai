@@ -17,7 +17,7 @@ print("\n=========")
 print(text)
 print("=========\n")
 
-audio_directory_name = "audio"
+audio_directory_name = os.environ.get("AUDIO_DIRECTORY_NAME")
 audio_path = f"{audio_directory_name}/tts-{uuid7str()}.mp3"
 # ディレクトリがなければ作る
 if not os.path.exists(audio_directory_name):
