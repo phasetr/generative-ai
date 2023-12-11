@@ -16,7 +16,9 @@ class TTS:
         if not os.path.exists(self.audio_directory_name):
             os.mkdir(self.audio_directory_name)
 
-        self.audio_path = f"{self.audio_directory_name}/tts-{uuid7str()}.mp3"
+        uuid = uuid7str()
+        self.orig_audio_path = f"{self.audio_directory_name}/{uuid}-orig.mp3"
+        self.converted_audio_path = f"{self.audio_directory_name}/{uuid}-converted.mp3"
         self.sample_text_name = os.environ.get("SAMPLE_TEXT_FILE_NAME")
 
     def create_audio(self, text):
@@ -29,8 +31,8 @@ class TTS:
                 voice=os.environ.get("TTS_VOICE", "nova"),
                 input=text
             )
-            response.stream_to_file(self.audio_path)
-            return self.audio_path
+            response.stream_to_file(self.converted_audio_path)
+            return self.converted_audio_path
         except Exception as e:
             print(e)
             traceback.print_exc()
@@ -49,8 +51,8 @@ class TTS:
                     voice=os.environ.get("TTS_VOICE", "nova"),
                     input=text
                 )
-                response.stream_to_file(self.audio_path)
-                return self.audio_path
+                response.stream_to_file(self.orig_audio_path)
+                return self.orig_audio_path
         except Exception as e:
             print(e)
             traceback.print_exc()
