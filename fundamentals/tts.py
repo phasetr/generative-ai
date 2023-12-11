@@ -1,8 +1,6 @@
 import os
 from uuid_extensions import uuid7str
 from openai import OpenAI
-import openai
-from pathlib import Path
 
 sample_text_name = "sample1.txt"
 is_exist = os.path.exists(sample_text_name)
