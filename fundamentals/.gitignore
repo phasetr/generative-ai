@@ -1,3 +1,5 @@
+__pycache__
+.mypy_cache
 audio
 poll
 sample1.txt
