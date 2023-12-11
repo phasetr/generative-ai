@@ -1,34 +1,63 @@
 import os
+import traceback
 from uuid_extensions import uuid7str
 from openai import OpenAI
 
-sample_text_name = "sample1.txt"
-is_exist = os.path.exists(sample_text_name)
-if not is_exist:
-    print(f"{sample_text_name}を作成してください。")
-    exit()
 
-print("テキストを読み込みます。")
-text = ""
-with open(sample_text_name, mode="r", encoding="utf-8") as f:
-    text = f.read()
+class TTS:
+    """_summary_
+    適当なテキストから音声ファイルを作る。
+    """
 
-print("\n=========")
-print(text)
-print("=========\n")
+    def __init__(self) -> None:
+        self.audio_directory_name = os.environ.get(
+            "AUDIO_DIRECTORY_NAME", "audio")
+        # ディレクトリがなければ作る
+        if not os.path.exists(self.audio_directory_name):
+            os.mkdir(self.audio_directory_name)
 
-audio_directory_name = os.environ.get("AUDIO_DIRECTORY_NAME")
-audio_path = f"{audio_directory_name}/tts-{uuid7str()}.mp3"
-# ディレクトリがなければ作る
-if not os.path.exists(audio_directory_name):
-    os.mkdir(audio_directory_name)
+        self.audio_path = f"{self.audio_directory_name}/tts-{uuid7str()}.mp3"
+        self.sample_text_name = os.environ.get("SAMPLE_TEXT_FILE_NAME")
 
-print("音声ファイルを作成します。")
-client = OpenAI()
-response = client.audio.speech.create(
-    model="tts-1",
-    voice="nova",
-    input=text
-)
-response.stream_to_file(audio_path)
-print(f"音声ファイルを作成しました: {audio_path}")
+    def create_audio(self, text):
+        """指定されたテキストから音声ファイルを作る"""
+
+        try:
+            client = OpenAI()
+            response = client.audio.speech.create(
+                model=os.environ.get("TTS_MODEL"),
+                voice=os.environ.get("TTS_VOICE", "nova"),
+                input=text
+            )
+            response.stream_to_file(self.audio_path)
+            return self.audio_path
+        except Exception as e:
+            print(e)
+            traceback.print_exc()
+            exit()
+
+    def create_audio_from_sample_text(self):
+        """環境変数`SAMPLE_TEXT_NAME`に指定されたテキストファイルを読み込んで音声ファイルを作る"""
+
+        try:
+            with open(self.sample_text_name, mode="r", encoding="utf-8") as f:
+                text = f.read()
+
+                client = OpenAI()
+                response = client.audio.speech.create(
+                    model=os.environ.get("TTS_MODEL"),
+                    voice=os.environ.get("TTS_VOICE", "nova"),
+                    input=text
+                )
+                response.stream_to_file(self.audio_path)
+                return self.audio_path
+        except Exception as e:
+            print(e)
+            traceback.print_exc()
+            exit()
+
+
+if __name__ == "__main__":
+    tts = TTS()
+    ret_audio_path = tts.create_audio_from_sample_text()
+    print(f"音声ファイルを作成しました: {ret_audio_path}")
