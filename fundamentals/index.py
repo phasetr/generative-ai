@@ -1,11 +1,14 @@
 from datetime import datetime
+from uuid_extensions import uuid7str
 import poll
 import stt
 import tts
 
-tts = tts.TTS()
+uuid = uuid7str()
+print(f"ファイル名：output/{uuid}")
+tts = tts.TTS(uuid)
 stt = stt.STT()
-adapter = poll.OpenAIAdapter()
+adapter = poll.OpenAIAdapter(uuid)
 
 # 開始時刻を取得
 start = datetime.now()
@@ -18,7 +21,7 @@ print(f"オリジナルの音声ファイル: {orig_audio_path}")
 text = stt.create_text(orig_audio_path)
 print(f"音声ファイルから読み取った文字列: {text}")
 # 文字列を`OpenAI`に投げて回答を取得する
-response_text = adapter.create_chat(text, orig_audio_path)
+response_text = adapter.create_chat(text)
 # 回答を音声に変換する
 converted_audio_path = tts.create_audio(response_text)
 print(f"変換された音声ファイル: {converted_audio_path}")

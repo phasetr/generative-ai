@@ -9,11 +9,13 @@ client = OpenAI(api_key=os.environ.get('OPENAI_API_KEY'))
 
 
 class OpenAIAdapter:
-    def __init__(self) -> None:
-        self.poll_directory_name = os.environ.get("POLL_DIRECTORY_NAME", "poll")
+    def __init__(self, file_root) -> None:
+        self.file_root = file_root
+        self.output_directory_name = os.environ.get(
+            "OUTPUT_DIRECTORY_NAME", "output")
         # ディレクトリがなければ作る
-        if not os.path.exists(self.poll_directory_name):
-            os.mkdir(self.poll_directory_name)
+        if not os.path.exists(self.output_directory_name):
+            os.mkdir(self.output_directory_name)
 
         # system_promptはsystem_prompt.txtから読み込む
         with open("system_prompt.txt", "r") as f:
@@ -26,7 +28,7 @@ class OpenAIAdapter:
             "content": message
         }
 
-    def create_chat(self, question, file_path):
+    def create_chat(self, question):
         system_message = self._create_message("system", self.system_prompt)
         user_message = self._create_message("user", question)
         messages = [system_message, user_message]
@@ -37,9 +39,7 @@ class OpenAIAdapter:
         content = res.choices[0].message.content
         
         # ファイルに書き出す
-        basename, _ = os.path.splitext(file_path)
-        text_file_root = basename.split("/")[-1]
-        text_file_path = f"{self.poll_directory_name}/{text_file_root}.txt"
+        text_file_path = f"{self.output_directory_name}/{self.file_root}-poll.txt"
         with open(text_file_path, mode="w", encoding="utf-8") as f0:
             f0.write(content)
         
@@ -47,8 +47,7 @@ class OpenAIAdapter:
 
 
 if __name__ == "__main__":
-    adapter = OpenAIAdapter()
     uuid = uuid7str()
-    file_path = f"{adapter.poll_directory_name}/{uuid}.txt"
-    response_text = adapter.create_chat("こんにちは", file_path)
+    adapter = OpenAIAdapter(uuid)
+    response_text = adapter.create_chat("こんにちは")
     print(response_text)

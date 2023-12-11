@@ -9,16 +9,16 @@ class TTS:
     適当なテキストから音声ファイルを作る。
     """
 
-    def __init__(self) -> None:
-        self.audio_directory_name = os.environ.get(
-            "AUDIO_DIRECTORY_NAME", "audio")
+    def __init__(self, uuid) -> None:
+        self.uuid = uuid
+        self.output_directory_name = os.environ.get(
+            "OUTPUT_DIRECTORY_NAME", "output")
         # ディレクトリがなければ作る
-        if not os.path.exists(self.audio_directory_name):
-            os.mkdir(self.audio_directory_name)
+        if not os.path.exists(self.output_directory_name):
+            os.mkdir(self.output_directory_name)
 
-        uuid = uuid7str()
-        self.orig_audio_path = f"{self.audio_directory_name}/{uuid}-orig.mp3"
-        self.converted_audio_path = f"{self.audio_directory_name}/{uuid}-converted.mp3"
+        self.orig_audio_path = f"{self.output_directory_name}/{uuid}-orig.mp3"
+        self.converted_audio_path = f"{self.output_directory_name}/{uuid}-converted.mp3"
         self.sample_text_name = os.environ.get("SAMPLE_TEXT_FILE_NAME")
 
     def create_audio(self, text):
@@ -60,6 +60,7 @@ class TTS:
 
 
 if __name__ == "__main__":
-    tts = TTS()
+    uuid = uuid7str()
+    tts = TTS(uuid)
     ret_audio_path = tts.create_audio_from_sample_text()
     print(f"音声ファイルを作成しました: {ret_audio_path}")

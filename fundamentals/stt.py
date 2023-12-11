@@ -5,11 +5,11 @@ import os
 
 class STT:
     def __init__(self) -> None:
-        self.text_directory_name = os.environ.get(
-            "TEXT_DIRECTORY_NAME", "text")
+        self.output_directory_name = os.environ.get(
+            "OUTPUT_DIRECTORY_NAME", "output")
         # ディレクトリがなければ作る
-        if not os.path.exists(self.text_directory_name):
-            os.mkdir(self.text_directory_name)
+        if not os.path.exists(self.output_directory_name):
+            os.mkdir(self.output_directory_name)
 
     def create_text(self, audio_path):
         """音声ファイルからテキストを作る"""
@@ -26,7 +26,7 @@ class STT:
                 # 変換結果からテキストを抽出して書き出す
                 basename, _ = os.path.splitext(audio_path)
                 text_file_root = basename.split("/")[-1]
-                text_file_path = f"{self.text_directory_name}/{text_file_root}.txt"
+                text_file_path = f"{self.output_directory_name}/{text_file_root}.txt"
                 with open(text_file_path, mode="w", encoding="utf-8") as f0:
                     f0.write(transcript)
                 return transcript
