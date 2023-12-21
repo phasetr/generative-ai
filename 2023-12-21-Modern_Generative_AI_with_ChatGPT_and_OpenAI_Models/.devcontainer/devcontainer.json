@@ -10,7 +10,7 @@
 	// "forwardPorts": [],
 	"runArgs": [
 		"--env-file",
-		"../.env"
+		".env"
 	],
 	"remoteEnv": {
 		"OPENAI_API_KEY": "${containerEnv:OPENAI_API_KEY}"
