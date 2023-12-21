@@ -37,12 +37,12 @@ class OpenAIAdapter:
             messages=messages)
         # 返り値のテキストを出力する
         content = res.choices[0].message.content
-        
+
         # ファイルに書き出す
         text_file_path = f"{self.output_directory_name}/{self.file_root}-poll.txt"
         with open(text_file_path, mode="w", encoding="utf-8") as f0:
             f0.write(content)
-        
+
         return content
 
 

@@ -1,0 +1,7 @@
+langchain==0.0.225
+openai==0.28.1
+requests==2.31.0
+sounddevice==0.4.6
+soundfile==0.12.1
+streamlit==1.24.0
+uuid7==0.1.0

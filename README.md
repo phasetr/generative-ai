@@ -9,6 +9,9 @@
 ## メモ
 
 - [ChatGPT音声対話システムをブラウザ上で動かしてみた！- VTuberとの楽しい対話も実現！](https://qiita.com/sayonari/items/d6a43e1608156c5ad364)
+- [Amazon BedrockのClaudeとAmazon Connectを利用し、電話で色々な質問に答えてくれるコールセンター向けAIチャットボットを構築してみた](https://dev.classmethod.jp/articles/amazon-bedrock-claude-connect-lex/)
+- [【Twilio講座 入門編①】コミュニケーションAPIのTwilioとは？](https://cloudapi.kddi-web.com/magazine/twilio-lesson/what-is-twilio-of-the-communication-api)
+    - [Twilio Docs](https://www.twilio.com/docs)
 
 ### `vocode`
 
