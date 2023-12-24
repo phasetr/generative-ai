@@ -19,6 +19,8 @@
 - rinnaによる日本語特化のGPT-2 LLM
   - HuggingFace: <https://huggingface.co/rinna/japanese-gpt2-medium>
   - GitHub: <https://github.com/rinnakk/japanese-pretrained-models>
+- Packt: [Building AI Applications with ChatGPT APIs](https://subscription.packtpub.com/book/data/9781805127567)
+  - GitHub: [Building-AI-Applications-with-ChatGPT-APIs](https://github.com/PacktPublishing/Building-AI-Applications-with-ChatGPT-APIs)
 
 ### `vocode`
 

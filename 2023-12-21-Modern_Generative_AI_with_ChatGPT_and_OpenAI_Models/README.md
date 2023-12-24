@@ -1,7 +1,24 @@
 # README
 
-- GitHub: [Modern-Generative-AI-with-ChatGPT-and-OpenAI-Models](https://github.com/PacktPublishing/Modern-Generative-AI-with-ChatGPT-and-OpenAI-Models/tree/main/Chapter%204%20-%20Prompt%20design)
+-
+GitHub: [Modern-Generative-AI-with-ChatGPT-and-OpenAI-Models](https://github.com/PacktPublishing/Modern-Generative-AI-with-ChatGPT-and-OpenAI-Models/tree/main/Chapter%204%20-%20Prompt%20design)
 - [Packt Online](https://subscription.packtpub.com/book/data/9781805123330)
+
+## `venv`
+
+- 必要なバージョンが入っているか確認
+
+```shell
+asdf list all python
+```
+
+```shell
+asdf install python 3.11.7
+asdf local python 3.11.7
+python --version
+python -m venv .venv
+source .venv/bin/activate
+```
 
 ## 初期化
 
